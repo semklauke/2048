@@ -1,0 +1,1031 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"trasition",
+				"transition-duration"
+			],
+			[
+				"tra",
+				"transition-property"
+			],
+			[
+				"e",
+				"ease-in-out"
+			],
+			[
+				"box-",
+				"box-shadow"
+			],
+			[
+				"pa",
+				"padding-top"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"font-s",
+				"font-style"
+			],
+			[
+				"border-ra",
+				"border-radius"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"cont",
+				"continue〔keyword〕"
+			],
+			[
+				"re",
+				"removePice"
+			],
+			[
+				"old",
+				"oldPice"
+			],
+			[
+				"get",
+				"getPice"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"new",
+				"newPice〔function〕"
+			],
+			[
+				"next",
+				"nextPice〔variable〕"
+			],
+			[
+				"c",
+				"cords"
+			],
+			[
+				"co",
+				"cords"
+			],
+			[
+				"path",
+				"pathY〔variable〕"
+			],
+			[
+				"pic",
+				"pieces〔variable〕"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			],
+			[
+				"padi",
+				"padding-right"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"fun",
+				"function〔keyword〕"
+			],
+			[
+				"addC",
+				"appendChild〔function〕"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"font-si",
+				"font-size-adjust"
+			],
+			[
+				"fl",
+				"float"
+			],
+			[
+				"block",
+				"inline-block"
+			],
+			[
+				"col-",
+				"col-md-9"
+			],
+			[
+				"padd",
+				"padding-right"
+			],
+			[
+				"ge",
+				"gelaufen_m"
+			],
+			[
+				"smart",
+				"smartRound〔function〕"
+			],
+			[
+				"each",
+				"eachP〔variable〕"
+			],
+			[
+				"fi",
+				"fives"
+			],
+			[
+				"a",
+				"angekommen"
+			],
+			[
+				"l",
+				"laeuferStmt"
+			],
+			[
+				"pare",
+				"parseFloat〔function〕"
+			],
+			[
+				"spe",
+				"spenden"
+			],
+			[
+				"lae",
+				"laeufer〔variable〕"
+			],
+			[
+				"sp",
+				"spenden"
+			],
+			[
+				"s",
+				"spenden"
+			],
+			[
+				"la",
+				"laeufer_id"
+			],
+			[
+				"b",
+				"broadcast"
+			],
+			[
+				"un",
+				"unlock_laeufer"
+			],
+			[
+				"body",
+				"bodyParser.json"
+			],
+			[
+				"er",
+				"erhaltene_spende"
+			],
+			[
+				"in",
+				"insertSpenderStmt"
+			],
+			[
+				"try",
+				"try〔keyword〕"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"per",
+				"persons〔variable〕"
+			],
+			[
+				"bill",
+				"billing_end"
+			],
+			[
+				"se",
+				"seasons"
+			],
+			[
+				"tour",
+				"tournaments"
+			],
+			[
+				"opp",
+				"opponentID"
+			],
+			[
+				"Tour",
+				"tournament_date"
+			],
+			[
+				"op",
+				"opponentID"
+			],
+			[
+				"de",
+				"degreesMoved"
+			],
+			[
+				"parse",
+				"parseInt〔function〕"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"da",
+				"datetime"
+			],
+			[
+				"line",
+				"line_chart"
+			],
+			[
+				"msg",
+				"msgData"
+			],
+			[
+				"print",
+				"printVar〔variable〕"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"ech",
+				"echo2\techo '', PHP_EOL;"
+			],
+			[
+				"SP",
+				"$SPECIAL_TEAM_NAME〔variable〕"
+			],
+			[
+				"f",
+				"found"
+			],
+			[
+				"cur",
+				"cur-ha\tcursor: hand;"
+			],
+			[
+				"text-",
+				"text-align"
+			],
+			[
+				"tr",
+				"tr\tTag"
+			],
+			[
+				"li",
+				"link\tTag"
+			],
+			[
+				"im",
+				"important"
+			],
+			[
+				"I",
+				"important"
+			],
+			[
+				"bordr",
+				"border-radius"
+			],
+			[
+				"i",
+				"important"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"border",
+				"border-top"
+			],
+			[
+				"he",
+				"header"
+			],
+			[
+				"border-rad",
+				"border-bottom-left-radius"
+			],
+			[
+				"marg-",
+				"margin-left"
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"lis",
+				"list-n\tlist-style-type: none;"
+			],
+			[
+				"z",
+				"z-index"
+			],
+			[
+				"border-bo",
+				"border-bottom"
+			],
+			[
+				"bo",
+				"border-left"
+			],
+			[
+				"paddi",
+				"padding-right"
+			],
+			[
+				"fo",
+				"float"
+			],
+			[
+				"hre",
+				"href=\"static"
+			],
+			[
+				"rel",
+				"rel=\"stylesheet"
+			],
+			[
+				"list-",
+				"list-n\tlist-style-type: none;"
+			],
+			[
+				"up",
+				"updateStatus"
+			],
+			[
+				"stat",
+				"statusBtn"
+			],
+			[
+				"sta",
+				"statusText"
+			],
+			[
+				"_",
+				"_currentUndo"
+			],
+			[
+				"rem",
+				"removeClass"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"inn",
+				"inline-block"
+			],
+			[
+				"bord",
+				"border-right"
+			],
+			[
+				"_pl",
+				"_pickedPlayer"
+			],
+			[
+				"_hit",
+				"_pickedHit"
+			],
+			[
+				"lo",
+				"locked-in"
+			],
+			[
+				"_p",
+				"_playerPickLocked"
+			],
+			[
+				"_play",
+				"_pickedPlayer"
+			],
+			[
+				"_pi",
+				"_pickedHit"
+			],
+			[
+				"_pic",
+				"_pickedCoordinates"
+			],
+			[
+				"is",
+				"isThree"
+			],
+			[
+				"font-",
+				"font-weight"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"margin-",
+				"margin-top"
+			],
+			[
+				"pading",
+				"padding-top"
+			],
+			[
+				"play",
+				"playerJSON"
+			],
+			[
+				"player",
+				"playerData"
+			],
+			[
+				"tryp",
+				"tryp\ttryp"
+			],
+			[
+				"local",
+				"localStorage"
+			],
+			[
+				"reData",
+				"reDataComponents"
+			],
+			[
+				"sess",
+				"sessionStorage"
+			],
+			[
+				"reDA",
+				"reDataComponents"
+			],
+			[
+				"st",
+				"standingsStmt"
+			],
+			[
+				"post",
+				"postData"
+			],
+			[
+				"tabe",
+				"tableHtmlText"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"rec",
+				"record"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 634,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.css",
+			"settings":
+			{
+				"buffer_size": 2917,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/board.js",
+			"settings":
+			{
+				"buffer_size": 2748,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/main.js",
+			"settings":
+			{
+				"buffer_size": 1,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Snippet: ec",
+				"Snippet: echo2"
+			],
+			[
+				"Snippet: ech\t",
+				"Snippet: echo \"…\""
+			],
+			[
+				"Snippet: echo\t",
+				"Snippet: echo \"…\""
+			],
+			[
+				"Package Control: Inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 593.0
+	},
+	"console":
+	{
+		"height": 509.0,
+		"history":
+		[
+			"import urllib2,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), 'wb' ).write(by) if dh == h else None; print('Error validating download (got %s instead of %s), please try manual install' % (dh, h) if dh != h else 'Please restart Sublime Text to finish installation')",
+			"\"wtf\"",
+			"a+2",
+			"a=1",
+			"Array(16)",
+			"a=a",
+			"a",
+			"debug"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/semklauke/Documents/Projects/2048/2048.sublime-project",
+		"/Users/semklauke/Documents/Projects/2048/board.js",
+		"/Users/semklauke/Desktop/2048-AI-master/style/main.css",
+		"/Users/semklauke/Desktop/2048-AI-master/js/application.js",
+		"/Users/semklauke/Desktop/2048-AI-master/js/html_actuator.js",
+		"/Users/semklauke/Documents/Projects/smart-mirror/server/static/index.js",
+		"/Users/semklauke/Documents/Projects/smart-mirror/server/static/index.css",
+		"/Users/semklauke/Documents/Projects/smart-mirror/server/views/index.ejs",
+		"/Users/semklauke/Documents/Projects/smart-mirror/server/main.js",
+		"/Users/semklauke/Desktop/city.list.json",
+		"/Users/semklauke/Documents/Projects/smart-mirror/server/static/scroller.css",
+		"/Users/semklauke/Documents/Projects/smart-mirror/server/static/odometer.js",
+		"/Users/semklauke/Desktop/MultiLevelMenu-master/js/modernizr-custom.js",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/0AA5092A-1677-4806-A7CB-885BC2CC088D/index.ejs",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/BD61FE0C-0CA0-4E14-9289-144B225C99E7/login.ejs",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/53F0A60B-8702-49CA-A27E-1781716902A3/login.js",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/EA31C364-DA8D-496B-8FF9-2FCFBD4B953F/login.css",
+		"/Users/semklauke/Documents/Projects/sponsorenlauf/views/templates/head.ejs",
+		"/Users/semklauke/Documents/Projects/sponsorenlauf/main.js",
+		"/Users/semklauke/Documents/Projects/sponsorenlauf/package.json",
+		"/Users/semklauke/Documents/Projects/sponsorenlauf/test.js",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/A3D6A0FA-278D-474D-A465-8ECAA2FE615C/rbs.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/42DEEDB3-9E7A-4561-B79D-C08FBFF57A6A/nginx.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/7198E798-ACB8-4EA0-B2DC-FE09BE5081CE/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/35F5E0E2-9AA7-4516-B8EA-401FA8492D27/bbstats.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/75A52BAB-62A4-40D8-8AD0-4122FCB7D792/__init__.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/93241C1C-501C-453A-A3DF-67216E26117D/template.sql",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/CC5D518D-38C2-4B8D-B7C7-9D2495FFACA1/template.sql",
+		"/Users/semklauke/Desktop/clone_schema.sql",
+		"/Users/semklauke/Desktop/notes.txt",
+		"/Users/semklauke/Desktop/db.sql",
+		"/Users/semklauke/Documents/Projects/BWIF2014/Junioraufgabe2/aufgabe2.c",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/9A38CF3B-FA90-4193-A16C-C7B6464BF013/pg_hba.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/703C892E-337A-455D-8720-16A280B37F05/bbstats.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/AF99B3DC-56C6-4328-ACF0-28C3F410A658/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/C33C1AEE-4C89-4091-8EA2-51E00B33F627/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/F7E91C8F-44EF-4B4C-A07C-E0C0EBEB35A9/php.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/04AE3645-1757-4ECC-B154-AF8C199234C3/nginx.conf",
+		"/Users/semklauke/Desktop/echoOnCourt.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/51CBBD7A-7249-4262-BED4-AE05C8082B3E/spigot_start.sh",
+		"/Users/semklauke/Documents/Develompent/GitHub/spacemission/main.py",
+		"/Users/semklauke/Desktop/Roulette.html",
+		"/Users/semklauke/Documents/Projects/Space Mission/spacemission/NMEAParser.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/92E10EF5-5E07-4867-A920-B6DD1F5C126E/admin.php",
+		"/Users/semklauke/Documents/Projects/WhatsAppParser/PNChart-master/PNChartDemo/PCChartViewController.h",
+		"/Users/semklauke/Documents/Projects/WhatsAppParser/PNChart-master/PNChartDemo/PCChartViewController.m",
+		"/Users/semklauke/Desktop/ZipArchive-master 2/ObjectiveCExample/ObjectiveCExampleTests/CollectingDelegate.m",
+		"/Users/semklauke/Desktop/ZipArchive-master 2/ObjectiveCExample/ObjectiveCExampleTests/CollectingDelegate.h",
+		"/Users/semklauke/Documents/Projects/WhatsAppParser/flask.py",
+		"/Users/semklauke/Documents/Projects/RBSWebsite/dbbparser/index.php",
+		"/Users/semklauke/Desktop/Charts-master/Charts.podspec",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/3AA74CB8-3D37-44AE-A3AD-6447C126A452/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/560DCAE6-77C4-4A69-A6C1-12731D09EF0B/kick.html",
+		"/Users/semklauke/Desktop/Pinfo/me/semKL/Pinfo/Pinfo.class",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/EAD8EBB9-6820-4069-AEC0-7918AB49E65E/permissions.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/11FA1E47-9DE0-4AB9-9C6D-6FB6B625A09F/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/114AC4C7-6F9C-4E85-ACA9-19B0FB2FB894/server.properties",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/58B8E276-42C8-4752-A70D-CA55AD79FFE7/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/050A7AD8-3732-4BEF-B277-47C7F0D1DB17/permissions.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/85825641-4D96-4538-9E51-D2D7D4B283BA/permissions.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/F2CE1153-61FD-4AFA-B2B8-D7C57DAC3A45/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/80F38EB1-5F3C-4AF8-8AE2-7EAF943D0C26/server.properties",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/53FC59F5-BD1A-44FC-9982-C7B424FBA18D/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/264BD206-A15C-4590-92FE-C36E74ECD341/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/0AE955E4-B845-41DB-AB72-38E1DB06C1AC/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/D68066AD-5008-48FF-9353-ED299908EC30/permissions.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/04BF3882-8765-4D3B-B1BC-40088A263695/groups.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/1E2746A4-B6CF-491C-9D4B-61418071B1BD/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/48EF11F0-648E-474E-92A2-D28F2B4B15A5/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/0DD1EFB2-DCC2-4D57-B064-5D1ECA1C5A61/server.properties",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/301F01BF-B6A3-4EC3-800D-D86018E5B656/server.properties",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/DFD1FCB6-C89B-4515-9397-4711309F535F/wepif.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/C9658118-A06A-4895-A6AD-D69CEF38B7E2/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/9BB61D5A-FAA1-4BFA-A518-ABB792B0F172/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/6A1E0066-671B-4F9A-A667-986DC1E588ED/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/6D335615-3F2B-4F13-81FE-78BEFB93E098/groups.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/3817498F-61CA-4990-A75C-ECCD08817E87/globalgroups.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/70FACC81-1340-4719-B32B-C1E6F09800B8/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/E56229D1-53DC-4CC4-A496-67A7B63881CA/config.yml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/3D08A501-0888-4CD1-A835-CA3C2F798219/curlRBSResults.py",
+		"/Users/semklauke/Desktop/Hanoi/src/hanoi/Stack.java",
+		"/Users/semklauke/Desktop/Hanoi/src/hanoi/Plate.java",
+		"/Users/semklauke/Desktop/Hanoi/src/hanoi/MoveButton.java",
+		"/Users/semklauke/Desktop/Hanoi/src/hanoi/Hanoi.java",
+		"/Users/semklauke/Desktop/Hanoi/src/hanoi/GUI.java",
+		"/Volumes/NO NAME/Hanoi/src/hanoi/Plate.java",
+		"/Volumes/NO NAME/Hanoi/src/hanoi/GUI.java",
+		"/Users/semklauke/Library/Application Support/Karabiner/private.xml",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/ACE9F772-DFCC-4A94-B678-8B2310298E39/index.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/0DD3FE18-5ECF-49A1-BE85-A4A283792FEA/index.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/D4E487F3-C452-44E0-A3AE-A6DA007D3901/index.php",
+		"/Volumes/NO NAME/Hanoi/src/hanoi/GUI.form",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/67801ED8-E334-4857-8701-51440E1D5132/servvars.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/802D1C26-188E-4163-AF43-C8277C17D3DA/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/5092CD84-8F45-4D91-8CCC-BF482775F62C/base1.css",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/9E587635-6F1C-4D86-BA35-BA9238096058/views.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/C0E61E08-D6B7-450C-A9FE-3D36E0E6DAEF/base.css",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/D4EA2CDB-9CCA-4A4C-AC52-8DA95BA88D81/base.html",
+		"/Users/semklauke/Desktop/initializr/css/main.css",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/4B810AD9-FAEA-457F-A495-BAC5C3202938/__init__.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/7BB1AEB6-1C49-4332-9A00-B64CD540E1A9/webserver.conf",
+		"/Users/semklauke/Desktop/Steckbrief.html",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/598B7A21-E331-49B6-A9D2-5DFB90FE01D8/start_server.sh",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/B786255B-1487-4623-8129-A27370A2DFA4/start_server.sh",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/60A4B81B-0D5A-47EE-94F4-A1E98F32A587/start_server.sh",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/5217C8FC-EA81-49DB-897F-759A683CBF62/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/80FDC069-D02F-4B06-B640-40857827A1DB/webserver.conf",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/E510B5E9-30E8-407A-B97F-3CC6CD286795/stats.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/DA01CDD2-5EB9-4D6E-843E-54243861BAE3/views.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/CBA08C2A-30AF-4B41-A90B-4CAEF5AFA636/__init__.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/1F6EBF41-5670-4230-A4C5-97B3A5485AB4/player.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/674E11DD-07DD-452F-812C-668155C19214/index.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/58927F43-0CED-4BDA-997B-B15255CAA5BC/games.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/298B6ED4-888A-4E52-A3BD-7DB4CC7F079E/crulTable.py",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/AB7E7DAF-1CED-45D1-8377-68716A23E53A/main.js",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/60E87C94-DEC3-4075-A186-973A78A61EC8/game.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/B26B06B2-560F-4135-B171-70084DCA751E/game.js",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/1239B588-2A13-4CDC-8D24-3C30D9BA5268/game.css",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/10338B97-9EF0-4EC5-82A9-17CEEA0B995F/offline.appcache",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/745C1AEC-B527-438B-919C-C6F304D3C130/index.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/E2A4A608-652B-488E-846B-3BF504358421/index.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/9F656317-90E0-4FB7-ABDC-3463BB1FC1E9/main.css",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/FDCA13C2-DC44-4143-B363-6E99371774EA/index.js",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/E0E1D759-086F-4BE7-A322-AB8931C2D8B5/main.js",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/CB9EA12D-F84A-45D5-9BE4-6EF3422DF09F/offline.appcache",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/789655E8-C302-48FA-8E4E-9A79B317C189/game.css",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/3295B14C-C502-45C0-B276-2852DC134DE3/game.php",
+		"/Users/semklauke/Library/Caches/Cleanup At Startup/Transmit/1C3A0D3E-7894-4B91-84DD-F7EB267FC010/game.js"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Soest",
+			"createFromHTML",
+			"animate",
+			"80",
+			"'",
+			"''",
+			"default_",
+			"include_recs",
+			"`",
+			"'",
+			"re",
+			"spawn",
+			"protection",
+			"spawn",
+			"clear",
+			"ui-focus",
+			">",
+			", ",
+			"oneEmpty",
+			"();\n",
+			"h2",
+			"ni61148_2sql4",
+			"data2",
+			"background-image",
+			"op",
+			"bed",
+			"wrapper"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"90",
+			"\"",
+			"null",
+			"\"",
+			"",
+			"\"",
+			"",
+			"\"",
+			"prag",
+			"true"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": false
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 634,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								126,
+								126
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "index.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1100,
+								1100
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "js/board.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2748,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "js/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.448454349033,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "2048.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 175.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 5
+	}
+}
