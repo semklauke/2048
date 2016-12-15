@@ -22,6 +22,7 @@ function cordsClass(cords) {
 function pieceClass(cords, value) {
     return "piece v"+parseInt(value)+" "+cordsClass(cords);
 }
+
 var uiMovePiece = function(oldPos, newPos, merged) {
     var oldP = document.getElementsByClassName(cordsClass(oldPos))[0];
     var v = merged ? parseInt(oldP.innerHTML) * 2 : oldP.innerHTML;
@@ -33,7 +34,11 @@ var uiMovePiece = function(oldPos, newPos, merged) {
 
 function computerMove() {
     var p = _board.addRandomPiece();
-    uiAddPiece(p.pos, p.value);
+    if (p)
+        uiAddPiece(p.pos, p.value);
+    else
+        newGame(); // lose
+    _board.playerMoved = false;
 }
 
 document.onkeydown = function(kdevent) {

@@ -68,6 +68,15 @@ Board.prototype.clearMerge = function() {
 				this.pieces[x][y].merged = false;
 };
 
+Board.prototype.freePieces = function() {
+	var ps = [];
+	for (var x=0; x<4; x++) 
+		for (var y=0; y<4; y++) 
+			if (this.getPiece({ x: x, y: y }) == null)
+				ps.push({ x: x, y: y });
+	return ps;
+};
+
 Board.prototype.moveBoard = function(x, y, uiMove) {
 	/* 	
 		up: 	 0 /  1
@@ -75,6 +84,11 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 		left: 	-1 /  0
 		right:   1 /  0
 	*/
+
+	var moved = false;
+
+	if (this.playerMoved == true)
+		return moved;
 
 	var pathX = x != 1 ? [0, 1, 2, 3] : [3, 2, 1, 0];
 	var pathY = y != 1 ? [0, 1, 2, 3] : [3, 2, 1, 0];
@@ -122,10 +136,12 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 			if (newPos.next != null && !newPos.next.merged && newPos.next.value == piece.value) {
 				this.addPiece(newPos.nextPos, newPiece(piece.value * 2, true));
 				this.removePiece(oldPos);
+				moved = true;
 				if (uiMove !== undefined) 
 					uiMove(oldPos, newPos.nextPos, true);
 			} else if (oldPos.x != newPos.pos.x || oldPos.y != newPos.pos.y) {
 				this.updatePosistion(oldPos, newPos.pos);
+				moved = true;
 				if (uiMove !== undefined)
 					uiMove(oldPos, newPos.pos, false);
 			}
@@ -137,7 +153,7 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 	console.log(_board.pieces);
 	this.playerMoved = true;
 	this.clearMerge();
-
+	return moved;
 
 };
 
@@ -151,6 +167,8 @@ Board.prototype.addRandomPiece = function() {
 			if (this.pieces[x][y] == null)
 				free.push({ x: x, y: y});
 
+	if (free.length == 0)
+		return null;
 	var cords = free[Math.round(Math.random() * (free.length-1))];
 	this.addPiece(cords, p);
 	return { pos: cords, value: p.value };
