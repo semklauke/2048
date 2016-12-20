@@ -1,5 +1,5 @@
 function AILayer(board) {
-	this.board = board.copy() = new Board();
+	this.board = board.copy();
 }
 
 AILayer.prototype.getDirections = function() {
@@ -15,8 +15,8 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 	self = this;
 	var result;
 	var nextMove;
-	var maxScore;
-	self.board = new Board(); // REMOVE AFETR DEVELOPMENT // AUTOCOMPLET TWEAK
+	var maxValue;
+	//self.board = new Board(); // REMOVE AFETR DEVELOPMENT // AUTOCOMPLET TWEAK
 
 	if (this.board.playerMoved) {
 		// ComputerTurn (Min)
@@ -57,9 +57,16 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 
 		for (var minimalPiece in smallestHeuristics) {
 			//minmax
+
+			result = minimax(depth, alpha, maxValue);
+
+			if (result.value < maxValue)
+				maxValue = result.value;
+
+			if (maxValue <= alpha)
+				return { direction: null, value: maxValue };
+
 		}
-
-
 		
 	} else {
 		// PlayerTurn (Max)
@@ -72,22 +79,24 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 					result = { direction: dir, value: self.getHeuristic() };
 				else {
 					var nextLevel = new AILayer(self.board);
-					result = nextLevel.minimax(depth-1, maxScore, beta);
+					result = nextLevel.minimax(depth-1, maxValue, beta);
 				}
 
 			}
 
-			if (result.value > bestScore) {
-				bestScore = result.value;
+			if (result.value > maxValue) {
+				maxValue = result.value;
 				nextMove = dir;
 			}
-			if (bestScore >= beta)
+			if (maxValue >= beta)
 				return { direction: nextMove, value: beta };
 		}
 
 
 
-	}
+	} // end player or compter 
+
+	return { direction: nextMove, value: maxValue };
 
 
 };
@@ -95,8 +104,8 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 AILayer.prototype.getHeuristic = function() {
 	
 	// calc 
-
-	return heuristics = 0;
+	return Math.round(Math.random() * 200); 
+	//return heuristics = 0;
 };
 
 
@@ -105,5 +114,7 @@ function MinimaxAI(board) {
 }
 
 MinimaxAI.prototype.deepening = function(minTime) {
-
+	var layer = new AILayer(this.board);
+	return layer.minimax(10, -10000, 10000);
 };
+

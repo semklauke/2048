@@ -1,5 +1,7 @@
 var _board;
+var _ai;
 var _pieceContainer = document.getElementById("pieces");
+var _aiButton = document.getElementById("ai-button");
 
 function newGame() {
     _board = new Board();
@@ -45,29 +47,56 @@ document.onkeydown = function(kdevent) {
     switch (kdevent.keyCode) {
         case 37:
             //left
-            var m = _board.moveBoard(-1, 0, uiMovePiece);
-            setTimeout(computerMove, 220);
+            if (_board.moveBoard(-1, 0, uiMovePiece))
+                setTimeout(computerMove, 220);
+            else _board.playerMoved = false;
             // console.log("left");
             break;
         case 38:
             //up
-            var m = _board.moveBoard(0, 1, uiMovePiece);
-            setTimeout(computerMove, 220);
+            if (_board.moveBoard(0, 1, uiMovePiece))
+                setTimeout(computerMove, 220);
+            else _board.playerMoved = false;
             // console.log("up");
             break;
         case 39:
             //right
-            var m = _board.moveBoard(1, 0, uiMovePiece);
-            setTimeout(computerMove, 220);
+            if (_board.moveBoard(1, 0, uiMovePiece))
+                setTimeout(computerMove, 220);
+            else _board.playerMoved = false;
             // console.log("right");
             break;
         case 40:
             //down
-            var m = _board.moveBoard(0, -1, uiMovePiece);
-            setTimeout(computerMove, 220);
+            if (_board.moveBoard(0, -1, uiMovePiece))
+                setTimeout(computerMove, 220);
+            else _board.playerMoved = false;
             // console.log("down");
             break;
     }
 };
+
+_aiButton.addEventListener("click", function() {
+    _ai = new MinimaxAI(_board);
+
+
+    function ehy(cnter) {
+        if (cnter > 100)
+            return;
+        var res = _ai.deepening(null);
+        if (_board.moveBoard(res.direction.x, res.direction.y, uiMovePiece)) {
+            setTimeout(function() {
+                computerMove();
+                ehy(cnter++);
+            }, 230);
+        } else _board.playerMoved = false;
+
+    }
+
+    ehy(0);
+
+});
+
+
 
 newGame();
