@@ -150,7 +150,7 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 			
 		}
 	}
-	console.log(_board.pieces);
+	//console.log(_board.pieces);
 	this.playerMoved = true;
 	this.clearMerge();
 	return moved;

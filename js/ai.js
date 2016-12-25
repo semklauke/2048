@@ -14,13 +14,14 @@ AILayer.prototype.getDirections = function() {
 AILayer.prototype.minimax = function(depth, alpha, beta) {
 	self = this;
 	var result;
-	var nextMove;
+	var nextMove = -1;
 	var maxValue;
+	console.log("HumandTurn: "+!this.board.playerMoved+" || depth: "+depth+" | alpha: "+alpha+" | beta: "+beta);
 	//self.board = new Board(); // REMOVE AFETR DEVELOPMENT // AUTOCOMPLET TWEAK
 
 	if (this.board.playerMoved) {
 		// ComputerTurn (Min)
-		
+		maxValue = beta;
 		//all possible pices
 		var frees = this.board.freePieces();
 		var positions = [];
@@ -33,12 +34,14 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 
 		var smallestHeuristics = [];
 
-		for (var cords in frees) {
-			this.board.addPice(cords, piece2);
+		var len = frees.length;
+		for (var j = 0; j < len; j++) {
+			var cords = frees[j];
+			this.board.addPiece(cords, piece2);
 			heuristics2.push(self.getHeuristic());
-			this.board.addPice(cords); // overwrites
+			this.board.addPiece(cords); // overwrites
 			heuristics4.push(self.getHeuristic());
-			this.board.removePice(cords);
+			this.board.removePiece(cords);
 			positions.push(cords);
 		}
 
@@ -46,56 +49,72 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 			Math.min.apply(null, heuristics2),
 			Math.min.apply(null, heuristics4));
 
-		if (heuristic2.length != heuristics4.length)
+		if (heuristics2.length != heuristics4.length)
 			console.log("UNEQUAL ERROR! 2: ", heuristics2.length, " // 4: ", heuristics4.length);
 
-		for (var i = heuristics2.length - 1; i >= 0; i--)
-			if (heuristics2[i] == minHeur)
+		len = (heuristics2.length + heuristics4.length) / 2;
+		for (var i = 0; i < len; i++) {
+			if (parseInt(heuristics2[i]) == parseInt(minHeur))
 				smallestHeuristics.push({ cords: positions[i], value: 2 });
-			if (heuristics4 == minHeur)
+			if (parseInt(heuristics4[i]) == parseInt(minHeur))
 				smallestHeuristics.push({ cords: positions[i], value: 4 });
+		}
+			
 
-		for (var minimalPiece in smallestHeuristics) {
+		len = smallestHeuristics.length;
+		for (var k = 0; k < len; k++) {
 			//minmax
-
-			result = minimax(depth, alpha, maxValue);
+			var minimalPiece = smallestHeuristics[k];
+			var nextLevel = new AILayer(self.board);
+			nextLevel.board.addPiece(minimalPiece.cords, newPiece(minimalPiece.value));
+			nextLevel.board.playerMoved = false;
+			
+			result = nextLevel.minimax(depth, alpha, maxValue);
 
 			if (result.value < maxValue)
 				maxValue = result.value;
 
-			if (maxValue <= alpha)
-				return { direction: null, value: maxValue };
+			if (maxValue <= alpha) {
+				console.log("Exit Point 1");
+				return { direction: null, value: alpha };
+			}
 
 		}
 		
 	} else {
 		// PlayerTurn (Max)
-
+		maxValue = alpha;
 		//Build Tree
-		for (var dir in this.getDirections()) {
-			if (self.board.moveBoard(dir.x, dir.y)) {
+		var directions = self.getDirections();
+		for (var i = 0; i < 4; i++) {
+			var dir = directions[i];
+			var nextLevel = new AILayer(self.board);
+			if (nextLevel.board.moveBoard(dir.x, dir.y)) {
 
 				if (depth == 0)
-					result = { direction: dir, value: self.getHeuristic() };
+					result = { direction: dir, value: nextLevel.getHeuristic() };
 				else {
-					var nextLevel = new AILayer(self.board);
 					result = nextLevel.minimax(depth-1, maxValue, beta);
+				}
+
+				if (result.value > maxValue) {
+					maxValue = result.value;
+					nextMove = dir;
+				}
+				if (maxValue >= beta) {
+					console.log("Exit Point 2");
+					return { direction: nextMove, value: beta };
 				}
 
 			}
 
-			if (result.value > maxValue) {
-				maxValue = result.value;
-				nextMove = dir;
-			}
-			if (maxValue >= beta)
-				return { direction: nextMove, value: beta };
+			
 		}
 
 
 
 	} // end player or compter 
-
+	console.log("Exit Point 3");
 	return { direction: nextMove, value: maxValue };
 
 
@@ -115,6 +134,6 @@ function MinimaxAI(board) {
 
 MinimaxAI.prototype.deepening = function(minTime) {
 	var layer = new AILayer(this.board);
-	return layer.minimax(10, -10000, 10000);
+	return layer.minimax(10, -Infinity, Infinity);
 };
 

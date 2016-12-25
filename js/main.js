@@ -80,20 +80,24 @@ _aiButton.addEventListener("click", function() {
     _ai = new MinimaxAI(_board);
 
 
-    function ehy(cnter) {
-        if (cnter > 100)
-            return;
+    function ehy() {
         var res = _ai.deepening(null);
-        if (_board.moveBoard(res.direction.x, res.direction.y, uiMovePiece)) {
+        console.log(res);
+        if (res.direction == -1) {
+            console.log("res waring");
+        } else if (_board.moveBoard(res.direction.x, res.direction.y, uiMovePiece)) {
             setTimeout(function() {
                 computerMove();
-                ehy(cnter++);
-            }, 230);
+                
+            }, 240);
+            setTimeout(function() {
+                ehy();
+            }, 1000)
         } else _board.playerMoved = false;
 
     }
 
-    ehy(0);
+    ehy();
 
 });
 
