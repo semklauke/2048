@@ -22,7 +22,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 	if (this.board.playerMoved) {
 		// ComputerTurn (Min)
 		maxValue = beta;
-		//all possible pices
+		//all possible pieces
 		var frees = this.board.freePieces();
 		var positions = [];
 		//filter those with the smalles heuristic
@@ -65,21 +65,24 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 		for (var k = 0; k < len; k++) {
 			//minmax
 			var minimalPiece = smallestHeuristics[k];
-			var nextLevel = new AILayer(self.board);
+			var nextLevel = new AILayer(this.board);
 			nextLevel.board.addPiece(minimalPiece.cords, newPiece(minimalPiece.value));
 			nextLevel.board.playerMoved = false;
 			
 			result = nextLevel.minimax(depth, alpha, maxValue);
 
-			if (result.value < maxValue)
+			if (result.value < maxValue) {
 				maxValue = result.value;
+				break;
+			}
 
 			if (maxValue <= alpha) {
 				console.log("Exit Point 1");
-				return { direction: null, value: alpha };
+				return { direction: null, value: maxValue };
 			}
 
 		}
+		return { direction: null, value: maxValue };
 		
 	} else {
 		// PlayerTurn (Max)
@@ -88,7 +91,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 		var directions = self.getDirections();
 		for (var i = 0; i < 4; i++) {
 			var dir = directions[i];
-			var nextLevel = new AILayer(self.board);
+			var nextLevel = new AILayer(this.board);
 			if (nextLevel.board.moveBoard(dir.x, dir.y)) {
 
 				if (depth == 0)
@@ -100,16 +103,18 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 				if (result.value > maxValue) {
 					maxValue = result.value;
 					nextMove = dir;
+					break;
 				}
 				if (maxValue >= beta) {
 					console.log("Exit Point 2");
-					return { direction: nextMove, value: beta };
+					return { direction: nextMove, value: maxValue };
 				}
 
 			}
 
 			
 		}
+		return { direction: nextMove, value: maxValue };
 
 
 
@@ -134,6 +139,6 @@ function MinimaxAI(board) {
 
 MinimaxAI.prototype.deepening = function(minTime) {
 	var layer = new AILayer(this.board);
-	return layer.minimax(10, -Infinity, Infinity);
+	return layer.minimax(10, -10000, 10000);
 };
 
