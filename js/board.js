@@ -5,9 +5,21 @@ function newPiece(v, m) {
 	};
 }
 
-function Board(index) {
-	this.pieces = [];
+function getDirections() {
+	return [
+		{ x: 0, y: 1 }, // up
+		{ x: 1, y: 0 } // right
+		{ x: 0, y: -1 }, // down
+		{ x: -1, y: 0 }, // left 
+		
+	];
+}
 
+function getPieceLvl(piece) {
+	return Math.log(parseInt(piece.value)) / Math.log(2);
+}
+
+function Board(index) {
 	if (index == undefined || index == true) 
 		for (var x=0; x<4; x++) {
 			this.pieces[x] = [];
@@ -18,13 +30,22 @@ function Board(index) {
 	this.playerMoved = false;
 }
 
+Board.prototype.getLvl = function(cords) {
+	if (this.onBoard(cords)) {
+		var p = this.getPiece(cords);
+		if (p != null && p != undefined)
+			return getPieceLvl(p);
+	}
+	return null;
+};
+
 Board.prototype.addPiece = function (cord, piece) {
 	this.pieces[cord.x][cord.y] = piece;
-}
+};
 
 Board.prototype.removePiece = function (cord) {
 	this.pieces[cord.x][cord.y] = null;
-}
+};
 
 
 Board.prototype.onBoard = function (piece) {
@@ -76,6 +97,33 @@ Board.prototype.freePieces = function() {
 				ps.push({ x: x, y: y });
 	return ps;
 };
+
+// ** direction: 0 / 1 (x / y)
+Board.prototype.nextPiece = function(cord, direction) {
+
+	if (direction != 1 && direction != 0)
+		return null;
+
+	var tmp;
+	var piece = cords;
+	var v = getDirections(direction);
+
+	do {
+		tmp = piece;
+		piece = { 
+			x: tmp.x + v.x,
+			y: tmp.y + v.y
+		};
+	} while (this.onBoard(piece) && this.getPiece(piece) == null);
+
+	return {
+		nextPos: tmp,
+		nextPiece: piece
+	};
+
+};
+
+
 
 Board.prototype.moveBoard = function(x, y, uiMove) {
 	/* 	

@@ -2,14 +2,6 @@ function AILayer(board) {
 	this.board = board.copy();
 }
 
-AILayer.prototype.getDirections = function() {
-	return [
-		{ x: 0, y: 1 }, // up
-		{ x: 0, y: -1 }, // down
-		{ x: -1, y: 0 }, // left 
-		{ x: 1, y: 0 } // right
-	];
-};
 
 AILayer.prototype.minimax = function(depth, alpha, beta) {
 	self = this;
@@ -88,7 +80,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 		// PlayerTurn (Max)
 		maxValue = alpha;
 		//Build Tree
-		var directions = self.getDirections();
+		var directions = getDirections();
 		for (var i = 0; i < 4; i++) {
 			var dir = directions[i];
 			var nextLevel = new AILayer(this.board);
@@ -130,6 +122,19 @@ AILayer.prototype.getHeuristic = function() {
 	// calc 
 	return Math.round(Math.random() * 200); 
 	//return heuristics = 0;
+};
+
+AILayer.prototype.smoothness = function() {
+
+	for (var x=0; x<4; x++) {
+	for (var y=0; y<4; y++) {
+
+		
+
+		var pLvl = getPieceLvl()
+
+	}} // end X and Y loop
+
 };
 
 
