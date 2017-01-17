@@ -126,12 +126,29 @@ AILayer.prototype.getHeuristic = function() {
 
 AILayer.prototype.smoothness = function() {
 
+	var smoothness = 1;
+	var directions = [getDirections(0), getDirections(1)];
+
 	for (var x=0; x<4; x++) {
 	for (var y=0; y<4; y++) {
 
-		
+		var c = { x: x, y: y };
+		if (this.board.getPiece(c) != null) {
+			var pLvl = this.board.getLvl(c);
 
-		var pLvl = getPieceLvl()
+			
+			for (var d = 0; d<2; d++) {
+				var nextPieceCords = this.board.nextPiece(c, directions[d]);
+				var nextPiece = this.board.getPiece(nextPieceCords.nextPiece);
+				if (nextPiece != null) {
+					//var netxtLvl = this.board.getLvl(nextPiece.nextPiece);
+					var nextLvl = getPieceLvl(netxPiece.value);
+					smoothness -= Math.abs(pLvl-nextLvl);	
+				}
+				
+
+			}
+		}
 
 	}} // end X and Y loop
 

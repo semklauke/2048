@@ -92,7 +92,7 @@ _aiButton.addEventListener("click", function() {
             }, 240);
             setTimeout(function() {
                 ehy();
-            }, 1000)
+            }, 340)
         } else _board.playerMoved = false;
 
     }

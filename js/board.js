@@ -8,10 +8,9 @@ function newPiece(v, m) {
 function getDirections() {
 	return [
 		{ x: 0, y: 1 }, // up
-		{ x: 1, y: 0 } // right
+		{ x: 1, y: 0 }, // right
 		{ x: 0, y: -1 }, // down
-		{ x: -1, y: 0 }, // left 
-		
+		{ x: -1, y: 0 } // left 
 	];
 }
 
@@ -20,6 +19,7 @@ function getPieceLvl(piece) {
 }
 
 function Board(index) {
+	this.pieces = [];
 	if (index == undefined || index == true) 
 		for (var x=0; x<4; x++) {
 			this.pieces[x] = [];
