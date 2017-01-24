@@ -36,7 +36,7 @@ Board.prototype.getLvl = function(cords) {
 		if (p != null && p != undefined)
 			return getPieceLvl(p);
 	}
-	return null;
+	return 0;
 };
 
 Board.prototype.addPiece = function (cord, piece) {
@@ -99,27 +99,31 @@ Board.prototype.freePieces = function() {
 };
 
 // ** direction: 0 / 1 (x / y)
-Board.prototype.nextPiece = function(cord, direction) {
-
+Board.prototype.nextPiece = function(cords, direction) {
+	self = this;
 	if (direction != 1 && direction != 0)
 		return null;
 
 	var tmp;
 	var piece = cords;
-	var v = getDirections(direction);
+	var v = getDirections()[direction];
+
+	var f = false;
 
 	do {
 		tmp = piece;
 		piece = { 
-			x: tmp.x + v.x,
-			y: tmp.y + v.y
+			x: (parseInt(tmp.x) + parseInt(v.x)),
+			y: (parseInt(tmp.y) + parseInt(v.y))
 		};
+		if (self.getPiece(piece) != null)
+			f = true;
 	} while (this.onBoard(piece) && this.getPiece(piece) == null);
 
-	return {
+	if (f) { return {
 		nextPos: tmp,
 		nextPiece: piece
-	};
+	}; } else return null;
 
 };
 

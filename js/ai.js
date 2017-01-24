@@ -8,7 +8,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 	var result;
 	var nextMove = -1;
 	var maxValue;
-	console.log("HumandTurn: "+!this.board.playerMoved+" || depth: "+depth+" | alpha: "+alpha+" | beta: "+beta);
+	//console.log("HumandTurn: "+!this.board.playerMoved+" || depth: "+depth+" | alpha: "+alpha+" | beta: "+beta);
 	//self.board = new Board(); // REMOVE AFETR DEVELOPMENT // AUTOCOMPLET TWEAK
 
 	if (this.board.playerMoved) {
@@ -30,9 +30,9 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 		for (var j = 0; j < len; j++) {
 			var cords = frees[j];
 			this.board.addPiece(cords, piece2);
-			heuristics2.push(self.getHeuristic());
+			heuristics2.push(this.getHeuristic());
 			this.board.addPiece(cords); // overwrites
-			heuristics4.push(self.getHeuristic());
+			heuristics4.push(this.getHeuristic());
 			this.board.removePiece(cords);
 			positions.push(cords);
 		}
@@ -118,16 +118,21 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 };
 
 AILayer.prototype.getHeuristic = function() {
-	
-	// calc 
-	return Math.round(Math.random() * 200); 
-	//return heuristics = 0;
+	var heuristics = [
+		{ v: this.smoothness(), m: 0.2 },
+		{ v: this.monotonic(), m: 0.9 }
+	];
+	var res = 0;
+	for (var i = heuristics.length - 1; i >= 0; i--)
+	 	res += parseFloat(heuristics[i].v) * parseFloat(heuristics[i].m);
+	console.log("[H]: ", res);
+	return res;
 };
 
 AILayer.prototype.smoothness = function() {
 
 	var smoothness = 1;
-	var directions = [getDirections(0), getDirections(1)];
+	var directions = [0, 1];
 
 	for (var x=0; x<4; x++) {
 	for (var y=0; y<4; y++) {
@@ -139,10 +144,10 @@ AILayer.prototype.smoothness = function() {
 			
 			for (var d = 0; d<2; d++) {
 				var nextPieceCords = this.board.nextPiece(c, directions[d]);
-				var nextPiece = this.board.getPiece(nextPieceCords.nextPiece);
+				var nextPiece = nextPieceCords != null ? this.board.getPiece(nextPieceCords.nextPiece) : null;
 				if (nextPiece != null) {
 					//var netxtLvl = this.board.getLvl(nextPiece.nextPiece);
-					var nextLvl = getPieceLvl(netxPiece.value);
+					var nextLvl = getPieceLvl(nextPiece);
 					smoothness -= Math.abs(pLvl-nextLvl);	
 				}
 				
@@ -152,6 +157,55 @@ AILayer.prototype.smoothness = function() {
 
 	}} // end X and Y loop
 
+	return smoothness;
+
+};
+
+
+AILayer.prototype.monotonic = function() {
+	var yAxis = { down: 0, up: 0 };
+	var xAxis = { left: 0, right: 0 };
+
+	for (var x=0; x<4; x++) {
+		var y = 0;
+		var nextPiece = y+1;
+		while (nextPiece<4) {
+			if (nextPiece<4 && this.board.getPiece({x: x, y: nextPiece}) == null) {
+				nextPiece++;
+			}
+			if (nextPiece>=4) { nextPiece--; }
+			var cValue = this.board.getLvl({x: x, y: y});
+			var nValue = this.board.getLvl({x: x, y: nextPiece});
+			if (cValue > nValue)
+				yAxis.up += nValue - cValue;
+			else if (nValue > cValue)
+				yAxis.down += cValue - nValue;
+			y = nextPiece;
+			nextPiece++;
+		}
+
+	}
+
+	for (var y=0; y<4; y++) {
+		var x = 0;
+		var nextPiece = x+1;
+		while (nextPiece<4) {
+			if (nextPiece<4 && this.board.getPiece({x: x, y: nextPiece}) == null) {
+				nextPiece++;
+			}
+			if (nextPiece>=4) { nextPiece--; }
+			var cValue = this.board.getLvl({x: x, y: y});
+			var nValue = this.board.getLvl({x: nextPiece, y: y});
+			if (cValue > nValue)
+				xAxis.left += nValue - cValue;
+			else if (nValue > cValue)
+				xAxis.right += cValue - nValue;
+			y = nextPiece;
+			nextPiece++;
+		}
+	}
+
+	return Math.max(yAxis.down, yAxis.up) + Math.max(xAxis.left, xAxis.right);
 };
 
 
