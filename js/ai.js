@@ -54,6 +54,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 			
 
 		len = smallestHeuristics.length;
+		minloop:
 		for (var k = 0; k < len; k++) {
 			//minmax
 			var minimalPiece = smallestHeuristics[k];
@@ -65,11 +66,11 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 
 			if (result.value < maxValue) {
 				maxValue = result.value;
-				break;
+				//continue minloop;
 			}
 
 			if (maxValue <= alpha) {
-				console.log("Exit Point 1");
+				//console.log("Exit Point 1");
 				return { direction: null, value: maxValue };
 			}
 
@@ -81,6 +82,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 		maxValue = alpha;
 		//Build Tree
 		var directions = getDirections();
+		maxloop:
 		for (var i = 0; i < 4; i++) {
 			var dir = directions[i];
 			var nextLevel = new AILayer(this.board);
@@ -95,10 +97,10 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 				if (result.value > maxValue) {
 					maxValue = result.value;
 					nextMove = dir;
-					break;
+					//continue maxloop;
 				}
 				if (maxValue >= beta) {
-					console.log("Exit Point 2");
+					//console.log("Exit Point 2");
 					return { direction: nextMove, value: maxValue };
 				}
 
@@ -111,7 +113,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 
 
 	} // end player or compter 
-	console.log("Exit Point 3");
+	//console.log("Exit Point 3");
 	return { direction: nextMove, value: maxValue };
 
 
@@ -120,12 +122,12 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 AILayer.prototype.getHeuristic = function() {
 	var heuristics = [
 		{ v: this.smoothness(), m: 0.2 },
-		{ v: this.monotonic(), m: 0.9 }
+		{ v: this.monotonic(), m: 1.1 }
 	];
 	var res = 0;
 	for (var i = heuristics.length - 1; i >= 0; i--)
 	 	res += parseFloat(heuristics[i].v) * parseFloat(heuristics[i].m);
-	console.log("[H]: ", res);
+	//console.log("[H]: ", res);
 	return res;
 };
 
@@ -215,6 +217,6 @@ function MinimaxAI(board) {
 
 MinimaxAI.prototype.deepening = function(minTime) {
 	var layer = new AILayer(this.board);
-	return layer.minimax(10, -10000, 10000);
+	return layer.minimax(5, -10000, 10000);
 };
 
