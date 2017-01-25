@@ -1,3 +1,4 @@
+var COUNTER = 20;
 function AILayer(board) {
 	this.board = board.copy();
 }
@@ -121,12 +122,16 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 
 AILayer.prototype.getHeuristic = function() {
 	var heuristics = [
-		{ v: this.smoothness(), m: 0.2 },
-		{ v: this.monotonic(), m: 1.1 }
+		{ v: this.smoothness(), m: 0.1 },
+		{ v: this.monotonic(), m: 1.0 },
+		{ v: this.emptyPieces(), m: 2.5 },
+		{ v: this.highestValue(), m: 1.0 }
 	];
 	var res = 0;
-	for (var i = heuristics.length - 1; i >= 0; i--)
+	for (var i = heuristics.length - 1; i >= 0; i--) {
 	 	res += parseFloat(heuristics[i].v) * parseFloat(heuristics[i].m);
+	 	if (COUNTER-- > 0) {console.log("[H * "+heuristics[i].v+"] "+heuristics[i].m); }
+	}
 	//console.log("[H]: ", res);
 	return res;
 };
@@ -208,6 +213,25 @@ AILayer.prototype.monotonic = function() {
 	}
 
 	return Math.max(yAxis.down, yAxis.up) + Math.max(xAxis.left, xAxis.right);
+};
+
+
+AILayer.prototype.emptyPieces = function() {
+	var count = this.board.freePieces().length;
+	return Math.log(parseInt(count));
+};
+
+
+AILayer.prototype.highestValue = function() {
+	var m = { value: 0 };
+	var p;
+	for (var x=0; x<4; x++) {
+	for (var y=0; y<4; y++) {
+		p = this.board.getPiece({ x: x, y: y });
+		if (p != null)
+			m = p.value > m.value ? p : m;
+	}}
+	return getPieceLvl(m);
 };
 
 
