@@ -1,6 +1,7 @@
 var COUNTER = 20;
-function AILayer(board) {
+function AILayer(board, heuData) {
 	this.board = board.copy();
+	this.heuristicValues = heuData;
 }
 
 
@@ -120,18 +121,21 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 
 };
 
+var NAMES = ["smoothness", "monotonic", "emptyPieces", "highestValue"];
+
 AILayer.prototype.getHeuristic = function() {
 	var heuristics = [
-		{ v: this.smoothness(), m: 0.1 },
-		{ v: this.monotonic(), m: 1.0 },
-		{ v: this.emptyPieces(), m: 2.5 },
-		{ v: this.highestValue(), m: 1.0 }
+		{ v: this.smoothness(), m: this.heuristicValues.smoothness },
+		{ v: this.monotonic(), m: this.heuristicValues.monotonic },
+		{ v: this.emptyPieces(), m: this.heuristicValues.emptyPieces },
+		{ v: this.highestValue(), m: this.heuristicValues.highestValue }
 	];
 	var res = 0;
 	for (var i = heuristics.length - 1; i >= 0; i--) {
 	 	res += parseFloat(heuristics[i].v) * parseFloat(heuristics[i].m);
-	 	if (COUNTER-- > 0) {console.log("[H * "+heuristics[i].v+"] "+heuristics[i].m); }
+	 	/*if (COUNTER-- > 0) {*/ //console.log("["+NAMES[i]+"] "+heuristics[i].v); //}
 	}
+
 	//console.log("[H]: ", res);
 	return res;
 };
@@ -235,12 +239,20 @@ AILayer.prototype.highestValue = function() {
 };
 
 
-function MinimaxAI(board) {
+function MinimaxAI(board, heuData) {
 	this.board = board;
+	this.heuristicValues = heuData != undefined || heuData != null ? heuData : {
+		smoothness: 0.2,
+		monotonic: 1.0,
+		emptyPieces: 2.5,
+		highestValue: 1.0
+	};
 }
 
-MinimaxAI.prototype.deepening = function(minTime) {
-	var layer = new AILayer(this.board);
-	return layer.minimax(5, -10000, 10000);
+MinimaxAI.prototype.deepening = function(deep) {
+	var layer = new AILayer(this.board, this.heuristicValues);
+	if (deep == null || deep == undefined)
+		deep = 1
+	return layer.minimax(deep, -Infinity, Infinity);
 };
 
