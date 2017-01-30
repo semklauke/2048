@@ -60,7 +60,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 		for (var k = 0; k < len; k++) {
 			//minmax
 			var minimalPiece = smallestHeuristics[k];
-			var nextLevel = new AILayer(this.board);
+			var nextLevel = new AILayer(this.board, this.heuristicValues);
 			nextLevel.board.addPiece(minimalPiece.cords, newPiece(minimalPiece.value));
 			nextLevel.board.playerMoved = false;
 			
@@ -87,7 +87,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 		maxloop:
 		for (var i = 0; i < 4; i++) {
 			var dir = directions[i];
-			var nextLevel = new AILayer(this.board);
+			var nextLevel = new AILayer(this.board, this.heuristicValues);
 			if (nextLevel.board.moveBoard(dir.x, dir.y)) {
 
 				if (depth == 0)
@@ -159,7 +159,12 @@ AILayer.prototype.smoothness = function() {
 				if (nextPiece != null) {
 					//var netxtLvl = this.board.getLvl(nextPiece.nextPiece);
 					var nextLvl = getPieceLvl(nextPiece);
-					smoothness -= Math.abs(pLvl-nextLvl);	
+					if (nextLvl == pLvl)
+						smoothness += pLvl*2;
+					else if (nextLvl - pLvl < pLvl - nextLvl)
+						smoothness += nextLvl - pLvl;
+					else
+						smoothness += pLvl - nextLvl;
 				}
 				
 
@@ -174,55 +179,50 @@ AILayer.prototype.smoothness = function() {
 
 
 AILayer.prototype.monotonic = function() {
-	var yAxis = { down: 0, up: 0 };
-	var xAxis = { left: 0, right: 0 };
+	var up = 0;
+	var right = 0;
 
 	for (var x=0; x<4; x++) {
 		var y = 0;
-		var nextPiece = y+1;
-		while (nextPiece<4) {
-			if (nextPiece<4 && this.board.getPiece({x: x, y: nextPiece}) == null) {
-				nextPiece++;
+		var nextY = y+1;
+		while (nextY<4) {
+			if (this.board.getPiece({ x: x, y: nextY }) == null) {
+				nextY++;
+				continue;
 			}
-			if (nextPiece>=4) { nextPiece--; }
-			var cValue = this.board.getLvl({x: x, y: y});
-			var nValue = this.board.getLvl({x: x, y: nextPiece});
-			if (cValue > nValue)
-				yAxis.up += nValue - cValue;
-			else if (nValue > cValue)
-				yAxis.down += cValue - nValue;
-			y = nextPiece;
-			nextPiece++;
+			var cValue = this.board.getLvl({ x: x, y: y });
+			var nValue = this.board.getLvl({ x: x, y: nextY });
+			up += nValue - cValue;
+			y = nextY;
+			nextY++;
 		}
+		
 
 	}
 
 	for (var y=0; y<4; y++) {
 		var x = 0;
-		var nextPiece = x+1;
-		while (nextPiece<4) {
-			if (nextPiece<4 && this.board.getPiece({x: x, y: nextPiece}) == null) {
-				nextPiece++;
+		var nextX = x+1;
+		while (nextX<4) {
+			if (this.board.getPiece({ x: nextX, y: y }) == null) {
+				nextX++;
+				continue;
 			}
-			if (nextPiece>=4) { nextPiece--; }
-			var cValue = this.board.getLvl({x: x, y: y});
-			var nValue = this.board.getLvl({x: nextPiece, y: y});
-			if (cValue > nValue)
-				xAxis.left += nValue - cValue;
-			else if (nValue > cValue)
-				xAxis.right += cValue - nValue;
-			y = nextPiece;
-			nextPiece++;
+			var cValue = this.board.getLvl({ x: x, y: y });
+			var nValue = this.board.getLvl({ x: nextX, y: y });
+			right += nValue - cValue;
+			x = nextX;
+			nextX++;
 		}
 	}
 
-	return Math.max(yAxis.down, yAxis.up) + Math.max(xAxis.left, xAxis.right);
+	return ((right * 1.2) + up);
 };
 
 
 AILayer.prototype.emptyPieces = function() {
 	var count = this.board.freePieces().length;
-	return Math.log(parseInt(count));
+	return Math.pow(parseInt(count), 0.7);
 };
 
 
@@ -242,9 +242,9 @@ AILayer.prototype.highestValue = function() {
 function MinimaxAI(board, heuData) {
 	this.board = board;
 	this.heuristicValues = heuData != undefined || heuData != null ? heuData : {
-		smoothness: 0.2,
-		monotonic: 1.0,
-		emptyPieces: 2.5,
+		smoothness: 0.3,
+		monotonic: 1.3,
+		emptyPieces: 1.0,
 		highestValue: 1.0
 	};
 }
@@ -252,7 +252,7 @@ function MinimaxAI(board, heuData) {
 MinimaxAI.prototype.deepening = function(deep) {
 	var layer = new AILayer(this.board, this.heuristicValues);
 	if (deep == null || deep == undefined)
-		deep = 1
+		deep = 4
 	return layer.minimax(deep, -Infinity, Infinity);
 };
 
