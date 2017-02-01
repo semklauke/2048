@@ -13,7 +13,8 @@ var _ai;
 
 var _infos;
 
-var _connection = mysql.createConnection({host:'vps.semklauke.de', user: 'sem', password: 'Fortess.11', database: '2048'});
+//var _connection = mysql.createConnection({host:'vps.semklauke.de', user: 'sem', password: 'Fortess.11', database: '2048'});
+var _connection = mysql.createConnection({host:'127.0.0.1', user: 'root', password: 'root', database: '2048'});
 
 function computerMove() {
 	_board.addRandomPiece();
