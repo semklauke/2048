@@ -23,8 +23,9 @@ function computerMove() {
 computerMove();computerMove();
 
 _connection.query('SELECT * FROM scheduled_runs ORDER BY priority DESC, recID ASC LIMIT 1', function (err, result, fields) {
-	if (result.length <= 0) {
+	if (result === undefined) {
 		_connection.end();
+		console.log("[2048Test] empty");
 		return;
 	}
 	_configID = parseInt(result[0].configID);
@@ -85,6 +86,7 @@ _connection.query('SELECT * FROM scheduled_runs ORDER BY priority DESC, recID AS
 
 		_connection.query('INSERT INTO finished_runs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', _infos, function(err3, result3, fields3){
 			_connection.end();
+			//console.log("1");
 		});
 
 	});
