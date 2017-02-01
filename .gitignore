@@ -2,3 +2,4 @@ documents/
 .DS_Store
 Icon?
 2048.sublime-workspace
+node_modules/

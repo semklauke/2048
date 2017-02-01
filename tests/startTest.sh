@@ -1,8 +1,13 @@
 #!/bin/bash
 set -o errexit
 
-node test.js &
-pid1=$!
-node test.js &
-pid2=$! 
+function testStart {
+	node test.js &
+	wait %1 && testStart
+}
 
+testStart &
+testStart &
+testStart &
+testStart &
+testStart &

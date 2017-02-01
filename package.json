@@ -1,0 +1,22 @@
+{
+  "name": "2048",
+  "version": "1.0.0",
+  "description": "AI for 2048",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "mysql2": "^1.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@vps.semklauke.de:~/2048/2048.git"
+  },
+  "author": "Sem Klauke",
+  "license": "ISC"
+}

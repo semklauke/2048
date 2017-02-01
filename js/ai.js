@@ -247,6 +247,7 @@ function MinimaxAI(board, heuData) {
 		emptyPieces: 1.0,
 		highestValue: 1.0
 	};
+	//console.log(this.heuristicValues);
 }
 
 MinimaxAI.prototype.deepening = function(deep) {

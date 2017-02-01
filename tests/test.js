@@ -1,62 +1,91 @@
 var fs = require('fs');
+var mysql = require('mysql2');
 eval(fs.readFileSync('../js/board.js')+'');
 eval(fs.readFileSync('../js/ai.js')+'');
 
 var _board = new Board();
 var _nMove;
+var _configID = null;
+var _config = {};
+var _versionID = null;
+var _priority = null;
+var _ai;
+
+var _infos;
+
+var _connection = mysql.createConnection({host:'vps.semklauke.de', user: 'sem', password: 'Fortess.11', database: '2048'});
 
 function computerMove() {
 	_board.addRandomPiece();
 	_board.playerMoved = false;
 }
 
-function logCord(x, y) {
-	var v = _board.pieces[x][y] == null ? "    ": "   "+(_board.pieces[x][y]).value;
-	return v.substr(-4);
-}
-
 computerMove();computerMove();
 
-var _ai = new MinimaxAI(_board);
+_connection.query('SELECT * FROM scheduled_runs ORDER BY priority DESC, recID ASC LIMIT 1', function (err, result, fields) {
+	if (result.length <= 0) {
+		_connection.end();
+		return;
+	}
+	_configID = parseInt(result[0].configID);
+	_versionID = parseInt(result[0].versionID);
+	_priority = parseInt(result[0].priority);
 
-while (true) {
-	_nMove = _ai.deepening(1);
-	if (_nMove.direction == -1)
-		break;
-	if (_board.moveBoard(_nMove.direction.x, _nMove.direction.y)) {
-		computerMove();
-	} else 
-		_board.playerMoved = false;
-} ;
+	_connection.query('DELETE FROM scheduled_runs WHERE recID = ?', [parseInt(result[0].recID)]);
 
-var infos = {
-	"2": 0,
-	"4": 0,
-	"8": 0,
-	"16": 0,
-	"32": 0,
-	"64": 0,
-	"128": 0,
-	"256": 0,
-	"512": 0,
-	"1024": 0,
-	"2048": 0,
-	"4096": 0,
-	"8192": 0,
-	"16384": 0,
-	"32768": 0,
-	"65536": 0,
-};
+	_connection.query('SELECT * FROM configs WHERE configID = ?', [_configID], function(err2, result2, fields2){
+		var resLength = result2.length;
+		for (var i=0; i<resLength; i++) {
+			_config[result2[i].name.toString()]=parseFloat(result2[i].value);
+		}
 
-for (var x=0; x<4; x++) {
-for (var y=0; y<4; y++) {
+		_ai = new MinimaxAI(_board, _config);
 
-	var p = _board.pieces[x][y];
-	if (p == null || p == undefined)
-		continue;
-	else
-		infos[p.value.toString()] += 1;
+		while (true) {
+			_nMove = _ai.deepening(1);
+			if (_nMove.direction == -1)
+				break;
+			if (_board.moveBoard(_nMove.direction.x, _nMove.direction.y)) {
+				computerMove();
+			} else 
+				_board.playerMoved = false;
+		}
 
-}}
+		_infos = [
+			_configID,
+			_versionID,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0,
+			0
+		];
 
-console.log(infos);
+		for (var x=0; x<4; x++) {
+		for (var y=0; y<4; y++) {
+		
+			var p = _board.pieces[x][y];
+			if (p == null || p == undefined)
+				continue;
+			else
+				_infos[(getPieceLvl(p)+1)] += 1;
+		
+		}}
+
+		_connection.query('INSERT INTO finished_runs VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', _infos, function(err3, result3, fields3){
+			_connection.end();
+		});
+
+	});
+});
