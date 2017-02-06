@@ -13,8 +13,8 @@ var _ai;
 
 var _infos;
 
-//var _connection = mysql.createConnection({host:'vps.semklauke.de', user: 'sem', password: 'Fortess.11', database: '2048'});
-var _connection = mysql.createConnection({host:'127.0.0.1', user: 'root', password: 'root', database: '2048'});
+var _connection = mysql.createConnection({host:'vps.semklauke.de', user: 'sem', password: 'Fortess.11', database: '2048'});
+//var _connection = mysql.createConnection({host:'127.0.0.1', user: 'root', password: 'root', database: '2048'});
 
 function computerMove() {
 	_board.addRandomPiece();
@@ -44,7 +44,7 @@ _connection.query('SELECT * FROM scheduled_runs ORDER BY priority DESC, recID AS
 		_ai = new MinimaxAI(_board, _config);
 
 		while (true) {
-			_nMove = _ai.deepening(1);
+			_nMove = _ai.deepening(3);
 			if (_nMove.direction == -1)
 				break;
 			if (_board.moveBoard(_nMove.direction.x, _nMove.direction.y)) {

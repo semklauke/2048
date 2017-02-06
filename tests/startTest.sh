@@ -8,6 +8,3 @@ function testStart {
 
 testStart &
 testStart &
-testStart &
-testStart &
-testStart &
