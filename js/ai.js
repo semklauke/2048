@@ -2,6 +2,13 @@ var COUNTER = 20;
 function AILayer(board, heuData) {
 	this.board = board.copy();
 	this.heuristicValues = heuData;
+	this.groupBoard = [];
+	for (var i=0; i<4; i++) {
+		var t = [];
+		for (var j=0; j<4; j++)
+			t.push(false);
+		this.groupBoard.push(t);
+	}
 }
 
 
@@ -140,6 +147,14 @@ AILayer.prototype.getHeuristic = function() {
 	return res;
 };
 
+AILayer.prototype.logHeuristics = function() {
+	console.log("[smoothness] "+this.smoothness()+" * "+this.heuristicValues.smoothness+" => "+(parseFloat(this.smoothness()*this.heuristicValues.smoothness))+" <= ");
+	console.log("[monotonic] "+this.monotonic()+" * "+this.heuristicValues.monotonic+" => "+(parseFloat(this.monotonic()*this.heuristicValues.monotonic))+" <= ");
+	console.log("[emptyPieces] "+this.emptyPieces()+" * "+this.heuristicValues.emptyPieces+" => "+(parseFloat(this.emptyPieces()*this.heuristicValues.emptyPieces))+" <= ");
+	console.log("[highestValue] "+this.highestValue()+" * "+this.heuristicValues.highestValue+" => "+(parseFloat(this.highestValue()*this.heuristicValues.highestValue))+" <= ");
+	console.log("[groups] => "+this.groups()+" <= ");
+}
+
 AILayer.prototype.smoothness = function() {
 
 	var smoothness = 1;
@@ -216,7 +231,7 @@ AILayer.prototype.monotonic = function() {
 		}
 	}
 
-	return ((right * 1.2) + up);
+	return ((right * 1.0) + up);
 };
 
 
@@ -236,6 +251,48 @@ AILayer.prototype.highestValue = function() {
 			m = p.value > m.value ? p : m;
 	}}
 	return getPieceLvl(m);
+};
+
+
+AILayer.prototype.markGroups = function(cords, value) {
+
+	var directions = getDirections();
+
+	if (this.board.onBoard(cords) 
+		&& this.board.getPiece(cords) != null 
+		&& this.board.getPiece(cords).value == value
+		&& this.groupBoard[cords.x][cords.y] == false) {
+
+		this.groupBoard[cords.x][cords.y] = true;
+
+		for (var d=0; d<4; d++) {
+			this.markGroups({ x: cords.x + directions[d].x, y: cords.y + directions[d].y, value });
+		}
+
+	}
+};
+
+
+AILayer.prototype.groups = function() {
+	var self = this;
+	var groups = 0;
+
+	for (var x=0; x<4; x++)
+    for (var y=0; y<4; y++) {
+    	this.groupBoard[x][y] = false;
+    }
+
+    for (var x=0; x<4; x++)
+    for (var y=0; y<4; y++) {
+    	if (this.board.pieces[x][y] != null && this.groupBoard[x][y] == false) {
+    		groups++;
+    		this.markGroups({x: x, y: y}, self.board.pieces[x][y].value);
+    	}
+
+    }
+
+    return groups;
+
 };
 
 

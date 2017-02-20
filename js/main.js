@@ -21,6 +21,12 @@ function cordsClass(cords) {
     return "x"+(cords.x+1)+"-y"+(cords.y+1);
 }
 
+function logHeuristics() {
+    var a = new MinimaxAI(_board);
+    var l =  new AILayer(_board, a.heuristicValues);
+    l.logHeuristics();
+}
+
 function pieceClass(cords, value) {
     return "piece v"+parseInt(value)+" "+cordsClass(cords);
 }
