@@ -23,7 +23,7 @@ function computerMove() {
 
 computerMove();computerMove();
 
-_connection.query('SELECT * FROM scheduled_runs ORDER BY priority DESC, recID ASC LIMIT 1', function (err, result, fields) {
+_connection.query('SELECT * FROM scheduled_runs WHERE versionID = 6 LIMIT 1', function (err, result, fields) {
 	if (result === undefined) {
 		_connection.end();
 		console.log("[2048Test] empty");
@@ -44,7 +44,7 @@ _connection.query('SELECT * FROM scheduled_runs ORDER BY priority DESC, recID AS
 		_ai = new MinimaxAI(_board, _config);
 
 		while (true) {
-			_nMove = _ai.deepening(3);
+			_nMove = _ai.deepening(4);
 			if (_nMove.direction == -1)
 				break;
 			if (_board.moveBoard(_nMove.direction.x, _nMove.direction.y)) {

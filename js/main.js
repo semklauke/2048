@@ -47,6 +47,8 @@ function computerMove() {
     else
         newGame(); // lose
     _board.playerMoved = false;
+    console.log("#######################################################################");
+    logHeuristics();
 }
 
 document.onkeydown = function(kdevent) {
@@ -87,7 +89,7 @@ _aiButton.addEventListener("click", function() {
 
 
     function ehy() {
-        var res = _ai.deepening(null);
+        var res = _ai.deepening(4);
         console.log(res);
         if (res.direction == -1) {
             console.log("res waring");

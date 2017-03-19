@@ -2,6 +2,7 @@ function newPiece(v, m) {
 	return {
 		value: parseInt(v),
 		merged: !!m,
+		old: null
 	};
 }
 
@@ -70,7 +71,9 @@ Board.prototype.freePiece = function(piece) {
 };
 
 Board.prototype.updatePosistion = function(oPiece, nPiece) {
-	this.addPiece(nPiece, this.getPiece(oPiece));
+	var np = this.getPiece(oPiece);
+	np.old = { x: oPiece.x, y: oPiece.y };
+	this.addPiece(nPiece, np);
 	this.removePiece(oPiece);
 };
 
@@ -136,7 +139,7 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 		left: 	-1 /  0
 		right:   1 /  0
 	*/
-
+	this.clearMerge();
 	var moved = false;
 
 	if (this.playerMoved == true)
@@ -202,9 +205,8 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 			
 		}
 	}
-	//console.log(_board.pieces);
 	this.playerMoved = true;
-	this.clearMerge();
+	//console.log(_board.pieces);
 	return moved;
 
 };

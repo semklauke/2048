@@ -19,7 +19,7 @@ computerMove();computerMove();
 var _ai = new MinimaxAI(_board);
 
 while (true) {
-	_nMove = _ai.deepening(5);
+	_nMove = _ai.deepening(4);
 	if (_nMove.direction == -1)
 		break;
 	if (_board.moveBoard(_nMove.direction.x, _nMove.direction.y)) {

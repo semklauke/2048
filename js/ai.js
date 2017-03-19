@@ -1,14 +1,14 @@
-var COUNTER = 20;
+var count= 20;
 function AILayer(board, heuData) {
 	this.board = board.copy();
 	this.heuristicValues = heuData;
 	this.groupBoard = [];
-	for (var i=0; i<4; i++) {
+	/*for (var i=0; i<4; i++) {
 		var t = [];
 		for (var j=0; j<4; j++)
 			t.push(false);
 		this.groupBoard.push(t);
-	}
+	}*/
 }
 
 
@@ -40,7 +40,7 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 			var cords = frees[j];
 			this.board.addPiece(cords, piece2);
 			heuristics2.push(this.getHeuristic());
-			this.board.addPiece(cords); // overwrites
+			this.board.addPiece(cords, piece4); // overwrites
 			heuristics4.push(this.getHeuristic());
 			this.board.removePiece(cords);
 			positions.push(cords);
@@ -60,7 +60,6 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 			if (parseInt(heuristics4[i]) == parseInt(minHeur))
 				smallestHeuristics.push({ cords: positions[i], value: 4 });
 		}
-			
 
 		len = smallestHeuristics.length;
 		minloop:
@@ -128,14 +127,16 @@ AILayer.prototype.minimax = function(depth, alpha, beta) {
 
 };
 
-var NAMES = ["smoothness", "monotonic", "emptyPieces", "highestValue"];
+var NAMES = ["smoothness", "monotonic", "emptyPieces", "highestValue", "merges", "distance"];
 
 AILayer.prototype.getHeuristic = function() {
 	var heuristics = [
 		{ v: this.smoothness(), m: this.heuristicValues.smoothness },
 		{ v: this.monotonic(), m: this.heuristicValues.monotonic },
 		{ v: this.emptyPieces(), m: this.heuristicValues.emptyPieces },
-		{ v: this.highestValue(), m: this.heuristicValues.highestValue }
+		{ v: this.highestValue(), m: this.heuristicValues.highestValue },
+		{ v: this.merges(), m: this.heuristicValues.merges }
+		//{ v: this.distance(), m: this.heuristicValues.distance }
 	];
 	var res = 0;
 	for (var i = heuristics.length - 1; i >= 0; i--) {
@@ -152,7 +153,9 @@ AILayer.prototype.logHeuristics = function() {
 	console.log("[monotonic] "+this.monotonic()+" * "+this.heuristicValues.monotonic+" => "+(parseFloat(this.monotonic()*this.heuristicValues.monotonic))+" <= ");
 	console.log("[emptyPieces] "+this.emptyPieces()+" * "+this.heuristicValues.emptyPieces+" => "+(parseFloat(this.emptyPieces()*this.heuristicValues.emptyPieces))+" <= ");
 	console.log("[highestValue] "+this.highestValue()+" * "+this.heuristicValues.highestValue+" => "+(parseFloat(this.highestValue()*this.heuristicValues.highestValue))+" <= ");
-	console.log("[groups] => "+this.groups()+" <= ");
+	//console.log("[groups] => "+this.groups()+" <= ");
+	console.log("[merges] "+this.merges()+" * "+this.heuristicValues.merges+" => "+(parseFloat(this.merges()*this.heuristicValues.merges))+" <= ");
+	//console.log("[distance] "+this.distance()+" * "+this.heuristicValues.distance+" => "+(parseFloat(this.distance()*this.heuristicValues.distance))+" <= ");
 }
 
 AILayer.prototype.smoothness = function() {
@@ -231,26 +234,34 @@ AILayer.prototype.monotonic = function() {
 		}
 	}
 
-	return ((right * 1.0) + up);
+	return ((right *1.05) + up);
 };
 
 
 AILayer.prototype.emptyPieces = function() {
-	var count = this.board.freePieces().length;
-	return Math.pow(parseInt(count), 0.7);
+	var count = parseInt(this.board.freePieces().length);
+	return Math.pow(parseInt(count), 0.8);
+
 };
 
 
 AILayer.prototype.highestValue = function() {
 	var m = { value: 0 };
 	var p;
+	var mult = 1;
+	var c;
 	for (var x=0; x<4; x++) {
 	for (var y=0; y<4; y++) {
 		p = this.board.getPiece({ x: x, y: y });
 		if (p != null)
-			m = p.value > m.value ? p : m;
+			if (p.value > m.value) {
+				m = p;
+				c = { x: x, y: y};
+			}	
 	}}
-	return getPieceLvl(m);
+	if (c.x == 3 && c.y == 3 || c.x == 3 && c.y == 0 || c.x == 0 && c.y == 3 || c.x == 0 && c.y == 0)
+		mult = 1.3;
+	return mult * getPieceLvl(m);
 };
 
 
@@ -295,14 +306,49 @@ AILayer.prototype.groups = function() {
 
 };
 
+AILayer.prototype.merges = function() {
+	var merge = 0;
+	for (var x=0; x<4; x++)
+	for (var y=0; y<4; y++) {
+		if (this.board.pieces[x][y] != null && this.board.pieces[x][y].merged == true ) {
+			var l = this.board.getLvl({ x: x, y: y });
+			if (l >= 6)
+				merge += Math.pow(Math.E, l*0.4);
+		}
+	}
+	return merge;
+}
+
+
+AILayer.prototype.distance = function() {
+	// lvl^2 * distance
+	var distance = 0;
+	for (var x=0; x<4; x++)
+	for (var y=0; y<4; y++) {
+		if (this.board.pieces[x][y] != null) {
+			var cPiece = this.board.pieces[x][y];
+			if (cPiece.old != null && cPiece.old != undefined && cPiece.merged == false) {
+				var l = this.board.getLvl({ x: x, y: y });
+				if (l >= 6)
+					distance += (Math.pow(Math.E, l*0.3)-1);
+					//(Math.abs(x - cPiece.old.x) + Math.abs(y - cPiece.old.y) //distance
+			}
+		}
+	}
+
+	return -distance;
+}
+
 
 function MinimaxAI(board, heuData) {
 	this.board = board;
 	this.heuristicValues = heuData != undefined || heuData != null ? heuData : {
-		smoothness: 0.3,
-		monotonic: 1.3,
+		smoothness: 0.2,
+		monotonic: 1.6,
 		emptyPieces: 1.0,
-		highestValue: 1.0
+		highestValue: 1.0,
+		merges: 0.3,
+		distance: 0.0
 	};
 	//console.log(this.heuristicValues);
 }
