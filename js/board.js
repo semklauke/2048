@@ -1,11 +1,24 @@
+//INFO:
+//cord-object = {x: a, y: b}
+//a, b (int) sind die die x/y Koordinaten
+
+// Konstruktor für das Piece-Objekt
+//-- arguments -- 
+// v (int) => Wert des Pieces
+// m (bool) => wurde im letzten Zug gemerged
+//-- return --
+// piece-object (obj)
 function newPiece(v, m) {
 	return {
-		value: parseInt(v),
-		merged: !!m,
-		old: null
+		value: parseInt(v), //Zahl auf dem Piece
+		merged: !!m, //true: wurde im letzten Zug aus 2 kleineren erstellt // false: nicht
+		old: null //für groups Heuristik benutzt
 	};
 }
 
+// Gibt alle Rechtungen als Vektoren zurück
+//-- return --
+// Array with cord-objects (array)
 function getDirections() {
 	return [
 		{ x: 0, y: 1 }, // up
@@ -15,22 +28,42 @@ function getDirections() {
 	];
 }
 
+// Errechnet Level (siehe Documenatation) des Pieces
+//-- arguments --
+// piece (piece-object) => 
+//-- return --
+// Level des Pieces (int)
 function getPieceLvl(piece) {
 	return Math.log(parseInt(piece.value)) / Math.log(2);
 }
 
+
+// Konstruktor der Klasse Board. Diese repräsentiert das Spielbrett und verwaltet die Pieces auf dem Brett
+//-- arguments -- 
+// index (bool) (can be undefinded) => soll das Brett indexiert werden ? 
+//-- return --
+// board-object (obj)
 function Board(index) {
-	this.pieces = [];
-	if (index == undefined || index == true) 
+	this.pieces = []; //Grundgerüst des Spielbertts. Enthält allte Pieces
+	if (index == undefined || index == true)
+		// Gerüst mit NULL Werten befüllen
 		for (var x=0; x<4; x++) {
 			this.pieces[x] = [];
 			for (var y=0; y<4; y++)
 				this.pieces[x][y] = null;
 		}
 	
-	this.playerMoved = false;
+	// Entscheidet ob am nächsten Zug der Spieler spielt, oder der Computer (-> neues Piece auf's Spielbrett)
+	// false: nächster Zug Spieler // true: nächster Zug Computer
+	this.playerMoved = false; //Spieler beginnt
 }
 
+// Gibt das Level des pieces an der Koordiante zurück
+//-- arguments --
+// cords (cords-object) => 
+//-- return --
+// lvl (int) => wenn cords auf Spielbrett und ein Piece vorhanden ist
+// 0 (int) => ansonsten
 Board.prototype.getLvl = function(cords) {
 	if (this.onBoard(cords)) {
 		var p = this.getPiece(cords);
@@ -40,43 +73,77 @@ Board.prototype.getLvl = function(cords) {
 	return 0;
 };
 
+// fügt ein Piece auf dem Spielbrett ein
+//-- arguments --
+// cord (cord-object) => Koordinaten wo das Piece einefügt wird
+// piece (piece-object) => Piece welches eingefügt wird  
 Board.prototype.addPiece = function (cord, piece) {
 	this.pieces[cord.x][cord.y] = piece;
 };
 
+// Löscht ein Piece auf dem Spielbrett
+//-- arguments --
+// cord (cord-object)
+//-- return --
 Board.prototype.removePiece = function (cord) {
 	this.pieces[cord.x][cord.y] = null;
 };
 
 
-Board.prototype.onBoard = function (piece) {
-	if (piece.x < 0 || piece.x > 3)
+// Prüft ob die Koordniaten auf dem Spielbrett liegen
+//-- arguments -- 
+// cord (cord-object) => zu prüfenden Koordinaten
+//-- return --
+// true (bool) => Koordinaten sind zulässig
+// fasle (bool) => Koordinaten sind unzulässig
+Board.prototype.onBoard = function (cord) {
+	if (cord.x < 0 || cord.x > 3)
 		return false;
-	if (piece.y < 0 || piece.y > 3)
+	if (cord.y < 0 || cord.y > 3)
 		return false;
 	return true;
 };
 
-Board.prototype.getPiece = function(piece) {
-	if (this.onBoard(piece))
-		return this.pieces[piece.x][piece.y];
+//Gibt Piece auf dem Spielbrett zurück
+//-- arguments --
+// cord (cord-object) => Koordinaten, von denen das Piece zurückgegeben werden soll
+//-- return --
+// piece-obejct (obj) => wenn Kooridinaten zulassig und Feld nicht leer
+// null => wenn Feld leer oder Kooridnaten unzulässig
+Board.prototype.getPiece = function(cord) {
+	if (this.onBoard(cord))
+		return this.pieces[cord.x][cord.y];
 	else 
 		return null;
 };
 
-Board.prototype.freePiece = function(piece) {
-	if (this.getPiece(piece) == null)
+// Prüft ob bei einer Koordinaten auf dem Spielbertt eine Piece vorhanden ist
+//-- arguments --
+// cord (cord-object) => zu prüfenden Koordinaten
+//-- return --
+// true (bool) => Das Feld ist frei
+// false (bool) => auf dem Feld ist ein Piece
+Board.prototype.freePiece = function(cord) {
+	if (this.getPiece(cord) == null)
 		return true;
 	else return false;
 };
 
-Board.prototype.updatePosistion = function(oPiece, nPiece) {
-	var np = this.getPiece(oPiece);
-	np.old = { x: oPiece.x, y: oPiece.y };
-	this.addPiece(nPiece, np);
-	this.removePiece(oPiece);
+// Verschiebt ein Piece auf dem Spiebrett auf eine neue Position
+//-- arguments --
+// oCord (cord-object) => Alte Position des Pieces
+// nCord (cord-object) => Neue Position des Pieces
+Board.prototype.updatePosistion = function(oCord, nCord) {
+	var np = this.getPiece(oCord);
+	np.old = { x: oCord.x, y: oCord.y };
+	this.addPiece(nCord, np);
+	this.removePiece(oCord);
 };
 
+// Kopiert die gesamte Board Klasse
+// Wird gebraucht um das Baord in der AI weiter spielen zu können, ohen das aktuelle Board zu beienfluss (Also die Variabvlenen dieses Boardes im Speicher)
+//-- return --
+// Board Klasse (obj) => Kopie dieser Klasse, nur neue Speicherstelle
 Board.prototype.copy = function() {
 	var newBoard = new Board(false);
 	for (var x=0; x<4; x++) {
@@ -85,6 +152,7 @@ Board.prototype.copy = function() {
 	return newBoard;
 };
 
+// Löscht aus allen Pieces die Information, ob sie im letzten zum gemerged wurden
 Board.prototype.clearMerge = function() {
 	for (var x=0; x<4; x++)
 		for (var y=0; y<4; y++)
@@ -92,6 +160,9 @@ Board.prototype.clearMerge = function() {
 				this.pieces[x][y].merged = false;
 };
 
+// Gibt alle Freien Felder auf dem Spielrett zurück
+//-- return --
+// array with cords-obejcts (array) => alle Koordianten die Frei sind
 Board.prototype.freePieces = function() {
 	var ps = [];
 	for (var x=0; x<4; x++) 
@@ -101,8 +172,18 @@ Board.prototype.freePieces = function() {
 	return ps;
 };
 
-// ** direction: 0 / 1 (x / y)
+
+// Errechnet das nächste Piece von einer Kooridnate aus in eine Richtung
+//-- arguments --
+// cords (cord-object) => ausgehend von dieser Kooridnate
+// direction (int) => 0: X-Richtung (up), 1: Y-Richtung (right)
+//-- return --
+// obj: 
+// 	nextPos (cord-object) => Koordinaten des nächsten Pieces
+//  nextPiece (piece-object) => Nächstes Piece
+// null => wenn es keine nächstes Piece mehr gibt    
 Board.prototype.nextPiece = function(cords, direction) {
+	// ** direction: 0 / 1 (x / y)
 	self = this;
 	if (direction != 1 && direction != 0)
 		return null;
@@ -131,14 +212,24 @@ Board.prototype.nextPiece = function(cords, direction) {
 };
 
 
-
-Board.prototype.moveBoard = function(x, y, uiMove) {
-	/* 	
-		up: 	 0 /  1
-		down: 	 0 / -1
-		left: 	-1 /  0
-		right:   1 /  0
-	*/
+// Führt einen Spielzug aus. Bewegt allso alle Pieces in die Richtung, in die der Spielzug ausgeführt wurde
+// Dabei werdne auch Pieces gemerged
+// Es gibt die Option eine Fuktion für das GUI mitzübergeben
+//-- arguments --
+// x (int) => bewegung in X-Richtung (0/1/-1)
+// y (int) => bewegung in Y-Richtung (0/1/-1)
+// uiMove (function) => uiMove(oldCord, newCord, merged)
+//   oldCord (cord-object) => alte position des Pieces
+//   newCord (cord-obejct) => neue position des Pieces
+//   merged (bool) => ist die neue position gemerged ?
+//-- return --
+// true (bool) => Spielrichtugn gültig und Spielzug wurde ausgeführt
+// false (bool) => Spielzug ist unszulässig
+Board.prototype.moveBoard = function(x, y, uiMove) { 	
+	//up:     0  /  1
+	//down:   0  / -1
+	//left:   -1 /  0
+	//right:  1  /  0
 	this.clearMerge();
 	var moved = false;
 
@@ -155,7 +246,6 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 
 			var cords = { x: pathX[xM], y: pathY[yM] };
 			var oldPos = { x: pathX[xM], y: pathY[yM] };
-			//console.log(cords);
 
 			var piece = this.getPiece(cords);
 
@@ -187,7 +277,6 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 				}
 			}
 
-
 			if (newPos.next != null && !newPos.next.merged && newPos.next.value == piece.value) {
 				this.addPiece(newPos.nextPos, newPiece(piece.value * 2, true));
 				this.removePiece(oldPos);
@@ -200,9 +289,6 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 				if (uiMove !== undefined)
 					uiMove(oldPos, newPos.pos, false);
 			}
-
-			
-			
 		}
 	}
 	this.playerMoved = true;
@@ -211,9 +297,13 @@ Board.prototype.moveBoard = function(x, y, uiMove) {
 
 };
 
-
+// Füt eine zufällges Piece (2/4) na eine Zufa4llige fereie Kooridnate auf dem Spiebrett
+//-- return --
+// obj:
+//   pos (cord-object) => Koordinaten des Hinugefügten Pieces
+//   value (int) => Wert des Hinugefügten Pieces 
 Board.prototype.addRandomPiece = function() {
-	var p = newPiece(Math.random() < 0.9 ? 2 : 4);
+	var p = newPiece(Math.random() < 0.9 ? 2 : 4); // 90% 2er, 10% 4er
 
 	var free = [];
 	for (var x=0; x<4; x++)

@@ -1,3 +1,6 @@
+// File um Configuratione zu erstellen als SQL befehtl
+
+//Range der einzelden Heuristken
 var sm_array = [0.4, 0.5, 0.6];
 var mo_array = [1.4, 1.6, 1.8];
 var em_array = [1.5, 2.0, 2.5];
@@ -6,7 +9,9 @@ var me_array = [0.7, 1.0];
 var di_array = [0.2, 0.4];
 
 var arrays = [sm_array, mo_array, em_array, hi_array, me_array, di_array];
-var lastNum = 500;
+var lastNum = 500; //letzte configID
+
+//alle mal alle
 for (var sm=0; sm<sm_array.length; sm++)
 for (var mo=0; mo<mo_array.length; mo++)
 for (var em=0; em<em_array.length; em++)
@@ -20,6 +25,6 @@ for (var di=0; di<di_array.length; di++)  {
 	string += "(NULL, "+lastNum+", 'highestValue', "+hi_array[hi]+"), ";
 	string += "(NULL, "+lastNum+", 'merges', "+me_array[me]+"), ";
 	string += "(NULL, "+lastNum+", 'distance', "+di_array[di]+");";
-	console.log(string);
+	console.log(string); // ausgeben und dann in eine .sql datei pipen
 	lastNum++;
 }
