@@ -299,15 +299,15 @@ AILayer.prototype.highestValue = function() {
 //##################################[ NOT IN USE ]##################################\\
 // Errechnet die Merges Heuristik (siehe Dokumentation)
 //-- result --
-// e ^ (merges*0.4) (float)
+// level^1.5 - 10 (float)
 AILayer.prototype.merges = function() {
 	var merge = 0;
 	for (var x=0; x<4; x++)
 	for (var y=0; y<4; y++) {
 		if (this.board.pieces[x][y] != null && this.board.pieces[x][y].merged == true ) {
 			var l = this.board.getLvl({ x: x, y: y });
-			if (l >= 6) // erst ab Wert 64 (lvl 6)
-				merge += Math.pow(Math.E, l*0.4);//immer stärker steigende Kurve -> um so höher der Wert des Pieces, um so höher der merge value
+			if (l >= 8) // erst ab Wert 265 (lvl 8)
+				merge += Math.pow(l, 1.5)-10;//immer stärker steigende Kurve -> um so höher der Wert des Pieces, um so höher der merge value
 		}
 	}
 	return merge;
@@ -346,11 +346,11 @@ function MinimaxAI(board, heuData) {
 	this.board = board;
 	// wenn keine Heurstik configuration übergebe wird, default (die beset die ich finden konnte) benuzten 
 	this.heuristicValues = heuData != undefined || heuData != null ? heuData : {
-		smoothness: 0.2,
+		smoothness: 0.4,
 		monotonic: 1.6,
-		emptyPieces: 1.0,
+		emptyPieces: 1.2,
 		highestValue: 1.0,
-		merges: 0.0,
+		merges: 0.5,
 		distance: 0.0
 	};
 	//console.log(this.heuristicValues);
