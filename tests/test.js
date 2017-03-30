@@ -20,7 +20,7 @@ var _ai;
 var _infos;
 
 // Verbindung zum Datenbank server (passwort)
-var _connection = mysql.createConnection({host:'vps.semklauke.de', user: 'sem', password: 'Fortess.11', database: '2048'});
+var _connection = mysql.createConnection({host:'vps.semklauke.de', user: '2048project', password: '2017#2048#sqlPassword', database: '2048'});
 //LOCAL var _connection = mysql.createConnection({host:'127.0.0.1', user: 'root', password: 'root', database: '2048'});
 
 function computerMove() {

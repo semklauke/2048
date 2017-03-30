@@ -216,7 +216,7 @@ AILayer.prototype.smoothness = function() {
 
 };
 
-// Errechnet die Monochromatik Heuristik (siehe Dokumentation)
+// Errechnet die Monotonie Heuristik (siehe Dokumentation)
 //-- return --
 // monotonic (float)
 AILayer.prototype.monotonic = function() {
@@ -296,7 +296,7 @@ AILayer.prototype.highestValue = function() {
 
 
 
-//##################################[ NOT IN USE ]##################################\\
+
 // Errechnet die Merges Heuristik (siehe Dokumentation)
 //-- result --
 // level^1.5 - 10 (float)
@@ -313,27 +313,7 @@ AILayer.prototype.merges = function() {
 	return merge;
 }
 
-//##################################[ NOT IN USE ]##################################\\
-// Errechnet die Distanz die Pieces zurücklegen als Heuristik (siehe Dokumentation)
-//-- return --
-// e ^ (distance traveld * 0.3) -1 (float)
-AILayer.prototype.distance = function() {
-	var distance = 0;
-	for (var x=0; x<4; x++)
-	for (var y=0; y<4; y++) {
-		if (this.board.pieces[x][y] != null) {
-			var cPiece = this.board.pieces[x][y];
-			if (cPiece.old != null && cPiece.old != undefined && cPiece.merged == false) {
-				var l = this.board.getLvl({ x: x, y: y });
-				if (l >= 6) // erst ab Wert 64 (lvl 6)
-					distance += (Math.pow(Math.E, l*0.3)-1); //immer stärker steigende Kurve -> um so höher der Wert des Pieces, um so höher der merge value
-					//(Math.abs(x - cPiece.old.x) + Math.abs(y - cPiece.old.y) //distance
-			}
-		}
-	}
 
-	return -distance;// soll sich negativ auswirken
-}
 
 // Konstruktor für die MinimaxAI klasse. Warper für die AIayer klassen
 //-- arguments --
@@ -366,6 +346,64 @@ MinimaxAI.prototype.deepening = function(deep) {
 		deep = 4 // default 4
 	return layer.minimax(deep, -Infinity, Infinity);
 };
+
+
+
+// Konstruktor für AI, die einfach zufällige Speilzüge wählt
+//-- arguments --
+// board (obj) => Board klasse. Spielbrett, welches vom GUI angezeiht wird. Haupt-Spielbrett sozusagen.
+//                Die Finalen Spielzüge weerden auf diesem Board ausgeführt
+//-- return --
+// RandomAI klasse (object)
+function RandomAI(board) {
+	this.board = board;
+	this.lastDirection = 3;
+}
+
+// Nimmt immer eine zufällige Richtung
+//-- return --
+// cord-object als Vektor
+RandomAI.prototype.fullRandom = function() {
+	return getDirections()[Math.floor(Math.random() * (3 - 0 +1)) + 0]; 
+}
+
+// Dreht das Spielbrett immer im Kreis 
+//-- return --
+// cord-object als Vektor
+RandomAI.prototype.circle = function() {
+	if (this.lastDirection == 3)
+		this.lastDirection = 0;
+	else
+		this.lastDirection++;
+
+	return getDirections()[this.lastDirection];
+}
+
+
+
+
+
+//##################################[ NOT IN USE ]##################################\\
+// Errechnet die Distanz die Pieces zurücklegen als Heuristik (siehe Dokumentation)
+//-- return --
+// e ^ (distance traveld * 0.3) -1 (float)
+AILayer.prototype.distance = function() {
+	var distance = 0;
+	for (var x=0; x<4; x++)
+	for (var y=0; y<4; y++) {
+		if (this.board.pieces[x][y] != null) {
+			var cPiece = this.board.pieces[x][y];
+			if (cPiece.old != null && cPiece.old != undefined && cPiece.merged == false) {
+				var l = this.board.getLvl({ x: x, y: y });
+				if (l >= 6) // erst ab Wert 64 (lvl 6)
+					distance += (Math.pow(Math.E, l*0.3)-1); //immer stärker steigende Kurve -> um so höher der Wert des Pieces, um so höher der merge value
+					//(Math.abs(x - cPiece.old.x) + Math.abs(y - cPiece.old.y) //distance
+			}
+		}
+	}
+
+	return -distance;// soll sich negativ auswirken
+}
 
 
 //##################################[ NOT IN USE ]##################################\\
