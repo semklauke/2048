@@ -340,7 +340,7 @@ function MinimaxAI(board, heuData) {
 // Iterativ deepeing ist das zwar nicht, funktiosn name bliebt aber (siehe dokumentation)
 //-- arguments --
 // deep (int) -> maxumale Baumtiefe für den Alogrthmus
-MinimaxAI.prototype.deepening = function(deep) {
+MinimaxAI.prototype.bestMove = function(deep) {
 	var layer = new AILayer(this.board, this.heuristicValues);
 	if (deep == null || deep == undefined)
 		deep = 4 // default 4

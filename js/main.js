@@ -114,7 +114,7 @@ _aiButton.addEventListener("click", function() {
 
     // rekusive funktion um immer wieder den Besten nächsten Zug zu errechnen mit der AI. 
     function bestMove() {
-        var res = _ai.deepening(4); //4 lvl deep
+        var res = _ai.bestMove(4); //4 lvl deep
         console.log(res);
         if (res.direction == -1) { // keine Züge mehr möglich, ai gibt -1 zurück
             console.log("result waring: -1");

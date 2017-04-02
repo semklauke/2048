@@ -4,7 +4,7 @@
 	echo '<tr> <th>ID</th> <th>-512-</th> <th>-1024-</th> <th>-2048-</th> <th>-4096-</th> <th>-8192-</th> <th>-16384-</th> </tr>', PHP_EOL;
 	$values = [];
 	try {
-		$db = new PDO("mysql:host="."78.47.153.155".";dbname="."2048".";charset=utf8", "sem", "Fortess.11");
+		$db = new PDO("mysql:host="."78.47.153.155".";dbname="."2048".";charset=utf8", "2048project", "2017#2048#sqlPassword");
 		// {DEBUG}
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 

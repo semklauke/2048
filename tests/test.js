@@ -56,7 +56,7 @@ _connection.query('SELECT * FROM scheduled_runs WHERE versionID = 6 ORDER BY pri
 		_ai = new MinimaxAI(_board, _config);
 
 		while (true) {
-			_nMove = _ai.deepening(4);
+			_nMove = _ai.bestMove(4);
 			if (_nMove.direction == -1)
 				break;
 			if (_board.moveBoard(_nMove.direction.x, _nMove.direction.y)) {
