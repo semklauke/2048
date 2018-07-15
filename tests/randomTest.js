@@ -7,14 +7,21 @@ var mysql = require('mysql2');
 eval(fs.readFileSync('../js/board.js')+'');
 eval(fs.readFileSync('../js/ai.js')+'');
 
+//login details (die angegebenen sind nicht mehr nutzbar)
+var __HOST = 'vps.semklauke.de';
+var __USER = '2048project';
+var __PASSWORD = '2017#2048#sqlPassword';
+var __DATABASE = '2048';
+
 var _board = null;
 var _nMove;
 var _ai;
 var _counter = 100;
 var _infos;
 
+
 // Verbindung zum Datenbank server (passwort)
-var _connection = mysql.createConnection({host:'vps.semklauke.de', user: '2048project', password: '2017#2048#sqlPassword', database: '2048'});
+var _connection = mysql.createConnection({host: __HOST, user: __USER, password: __PASSWORD, database: __DATABASE});
 
 function computerMove() {
 	_board.addRandomPiece();
